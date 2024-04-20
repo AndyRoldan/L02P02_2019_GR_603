@@ -1,8 +1,18 @@
+using L02P02_2019_GR_603.Models;
+
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Inyeccion por dependencia del string  de conexion al contexto
+builder.Services.AddDbContext<LibreriaDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("equiposDbConnection")
+        )
+     );
 
 var app = builder.Build();
 
